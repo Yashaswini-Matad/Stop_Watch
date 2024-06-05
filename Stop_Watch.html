@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1{
+            text-align: center;
+            margin-top: 50px;
+        }
+        #time{
+            display: flex;
+            justify-content: center;
+        }
+
+        #time h1{
+            background: black;
+            width: 120px;
+            height: 120px;
+            color: white;
+            margin: 0px 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 6px;
+        }
+        #button{
+            display: flex;
+            justify-content: center;
+        }
+        #button button{
+            background: rgb(123, 119, 119);
+            width: 100px;
+            height: 30px;
+            color: aliceblue;
+            margin: 30px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Stop Watch</h1>
+    <div id="time">
+        <h1 id="hr">0</h1>
+        <h1 id ="min">0</h1>
+        <h1 id="sec">0</h1>
+        <h1 id="msec">0</h1>
+    </div>
+    <div id="button">
+        <button id="start" onclick="start()"> Start </button>
+        <button id="pause" onclick="pause()"> Pause </button>
+        <button id="resume" onclick="resume()"> Resume </button>
+        <button id="stop" onclick="reset()"> Reset </button>
+    </div>
+
+    <script>
+        var x;
+        function start() {
+            let h =0;
+            let m =0;
+            let s =0;
+            let ms =0;
+
+            let hr = document.getElementById("hr");
+            let min = document.getElementById("min");
+            let sec = document.getElementById("sec");
+            let msec = document.getElementById("msec");
+
+             x = setInterval(()=>{
+                ms = ms+1;
+                msec.innerText=ms;
+                sec.innerText=s;
+                min.innerText=m;
+                if(ms==99)
+                {
+                    s++
+                    ms=0;
+                }
+                if(s==59)
+                {
+                    m++;
+                    s=0;
+                }
+        
+                
+
+
+ 
+            }, 10)
+            
+            
+        }
+        function pause() {
+            // let hr = document.getElementById("hr");
+            // let min = document.getElementById("min");
+            // let sec = document.getElementById("sec");
+            // let msec = document.getElementById("msec");
+
+            // hr.value = hr.innerText;
+            // min.value = min.innerText;
+            // sec.value= sec.innerText;
+            // msec.value = msec.innerText;
+            clearInterval(x);
+
+        }
+        function resume() {
+            let hr = document.getElementById("hr");
+            let min = document.getElementById("min");
+            let sec = document.getElementById("sec");
+            let msec = document.getElementById("msec");
+            let x = setInterval(()=>{
+                if(msec.innerText < 99){
+                    msec.innerText = Number(msec.innerText) + 1;  
+                }
+                if(msec.innerText == 99){
+                    msec.innerText = 0;
+                    if(sec.innerText < 59){
+                        sec.innerText = Number(sec.innerText) + 1;
+                    }
+                    if(sec.innerText == 59){
+                        sec.innerText = 0;
+                        if(min.innerText < 59){
+                            min.innerText = Number(min.innerText) + 1;
+                        }
+                        if(min.innerText == 59){
+                            min.innerText = 0;
+                            hr.innerText = Number(hr.innerText) + 1;
+                        }
+                    }
+              }
+            }, 10)
+            
+        }
+        function reset() {
+           clearInterval(x);
+           let hr = document.getElementById("hr");
+            let min = document.getElementById("min");
+            let sec = document.getElementById("sec");
+            let msec = document.getElementById("msec");
+
+            hr.innerText = 0;
+            min.innerText = 0;
+            sec.innerText = 0;
+            msec.innerText = 0;
+        }
+    </script>
+    
+</body>
+</html>
+
+<!-- 
+
+// if(msec.innerText < 99){
+    //     msec.innerText = Number(msec.innerText) + 1;  
+    // }
+    // if(msec.innerText == 99)
+    // {
+    //     msec.innerText = 0;
+    //     if(sec.innerText < 59){
+    //         sec.innerText = Number(sec.innerText) + 1;
+    //     }
+    //     if(sec.innerText == 59){
+    //         sec.innerText = 0;
+    //         if(min.innerText < 59){
+    //             min.innerText = Number(min.innerText) + 1;
+    //         }
+    //         if(min.innerText == 59){
+    //             min.innerText = 0;
+    //             hr.innerText = Number(hr.innerText) + 1;
+    //         }
+    //     }
+    // } -->
